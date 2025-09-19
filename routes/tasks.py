@@ -7,7 +7,7 @@ tasks_bp = Blueprint('tasks', __name__)
 @tasks_bp.route('/tasks', methods=['POST'])
 @jwt_required()
 def create_task():
-    user_id = int(get_jwt_identity())  # identity is a string, convert to int
+    user_id = int(get_jwt_identity())  
     data = request.json
     task = Task(
         title=data['title'],
@@ -23,7 +23,7 @@ def create_task():
 @tasks_bp.route('/tasks', methods=['GET'])
 @jwt_required()
 def get_tasks():
-    user_id = int(get_jwt_identity())  # identity is a string, convert to int
+    user_id = int(get_jwt_identity())  
     tasks = Task.query.filter_by(user_id=user_id).all()
     return jsonify([{
         'id': t.id,
